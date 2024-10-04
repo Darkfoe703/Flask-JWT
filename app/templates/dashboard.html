@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Dashboard</h1>
+        <p>Welcome, {{ username }}!</p>
+        <p><a href="/">Go back to Home</a></p>
+        <br>
+        <form action="/logout" method="POST">
+            <input type="submit" value="Logout" />
+        </form>
+    </main>
+</body>
+</html>

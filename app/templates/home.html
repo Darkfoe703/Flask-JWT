@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Welcome to the Home Page</h1>
+        <p>A JWT implementation with Flask</p>
+        <br>
+        <p><a class="pico-background-pink-600" role="button" href="/dashboard">If you're logged in, visit Dashboard</a></p>
+        <br>
+
+        <!-- Bloque para mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="grid">
+            <div>
+                <h3>Login</h3>
+                <form action="/login" method="POST">
+                    <fieldset>
+                        <input name="username" placeholder="Username" aria-label="Username" autocomplete="username" />
+                        <input type="password" name="password" placeholder="Password" aria-label="Password"
+                            autocomplete="current-password" required />
+                        <input type="submit" value="Log in" />
+                    </fieldset>
+                </form>
+            </div>
+            <div>
+                <h3>Register</h3>
+                <form action="/register" method="POST">
+                    <fieldset>
+                        <input name="username" placeholder="Username" aria-label="Username" autocomplete="username" />
+                        <input type="password" name="password" placeholder="Password" aria-label="Password"
+                            autocomplete="current-password" required />
+                        <input  class="pico-background-jade-450" type="submit" value="Register" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <br>
+        <form action="/logout" method="POST">
+            <input type="submit" value="Logout" />
+        </form>
+
+    </main>
+</body>
+</html>
