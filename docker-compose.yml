@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    container_name: container_db_users
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass1234
+      POSTGRES_DB: users_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  web:
+    build: .
+    container_name: container_jwt
+    ports:
+      - "5001:5001"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://postgres:pass1234@db:5432/users_db
+      - DATABASE_HOST=db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
